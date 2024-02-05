@@ -1,9 +1,14 @@
+import executeQuery from "../../../context/pgConnection";
 import Videojuego from "../../domain/videojuego";
 import VideojuegosRepository from "../../domain/videojuegosRepository";
 
 export default class VideojuegoRepositoryPostgres implements VideojuegosRepository{
 
-
+    async save(videojuego: Videojuego) {
+        const consulta = `insert into videojuegos (nombre) values ('${videojuego.nombre})`;
+        const rows: any[] = await executeQuery(consulta);
+    }
+   
     getAll() {
 
         const videojuegos: any[][] = []; 
@@ -15,10 +20,20 @@ export default class VideojuegoRepositoryPostgres implements VideojuegosReposito
             if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.status}`);
             }
-            return response.text();
+            return response.json();
         })
         .then(data => {
-            console.log(data);  // Aquí puedes manejar los datos obtenidos de Google
+            /*data.forEach(element =>{
+
+                const videojuego: any = {
+                    id:element.appid,
+                    nombre:element.name
+                }
+                
+                videojuegos.push(videojuego);
+            })  
+
+            console.log(videojuegos);*/
         })
         .catch(error => {
             console.error('Error:', error);

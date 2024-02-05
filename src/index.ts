@@ -17,3 +17,7 @@ app.use("/videojuegos", routerVideojuegos)
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+//Compra va a parte o en el repositorio de usuario? Por lo tanto habria que crear un compra.ts en usuarios
+//pq en su repo const {alias, password} = req.body en vez de usuario = req.body

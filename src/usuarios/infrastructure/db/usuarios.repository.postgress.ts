@@ -1,8 +1,16 @@
 import executeQuery from "../../../context/pgConnection";
+import Videojuego from "../../../videojuegos/domain/videojuego";
 import Usuario from "../../domain/usuario";
 import UsuarioRepository from "../../domain/usuarioRepository";
 
 export default class UsuarioRepositoryPostgress implements UsuarioRepository{
+    
+    addCarrito(videojuego: Videojuego) {
+        throw new Error("Method not implemented.");
+    }
+    getCarrito(idUsuario: number): Promise<Videojuego> {
+        throw new Error("Method not implemented.");
+    }
     
     async registro(usuario: Usuario): Promise<Usuario> {
         
