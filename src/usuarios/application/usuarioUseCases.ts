@@ -22,7 +22,7 @@ export default class UsuarioUseCases{
         if(!usuario.password)throw new Error("Falta password");
         const usuarioBD = await this.usuarioRepository.login(usuario);
         if(!usuarioBD) throw new Error("Usuario no encontrado");
-        const iguales = await compare(usuario.password, String(usuario.password));
+        const iguales = await compare(usuario.password, String(usuarioBD.password));
         if(iguales){
             return usuarioBD;
         }else{
