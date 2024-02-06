@@ -23,17 +23,7 @@ export default class VideojuegoRepositoryPostgres implements VideojuegosReposito
             return response.json();
         })
         .then(data => {
-            /*data.forEach(element =>{
-
-                const videojuego: any = {
-                    id:element.appid,
-                    nombre:element.name
-                }
-                
-                videojuegos.push(videojuego);
-            })  
-
-            console.log(videojuegos);*/
+            console.log(videojuegos)
         })
         .catch(error => {
             console.error('Error:', error);
