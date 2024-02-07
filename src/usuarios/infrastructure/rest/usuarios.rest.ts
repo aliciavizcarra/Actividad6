@@ -4,6 +4,7 @@ import UsuarioRepository from "../../domain/usuarioRepository";
 import UsuarioRepositoryPostgress from "../db/usuarios.repository.postgress";
 import Usuario from "../../domain/usuario";
 import { createToken, isAuth } from "../../../context/security/auth";
+import Videojuego from "../../../videojuegos/domain/videojuego";
 
 const usuarioUseCases: UsuarioUseCases = new UsuarioUseCases(new UsuarioRepositoryPostgress);
 
@@ -34,16 +35,31 @@ router.post("/login", async (req,res)=>{
 
 })
 
-router.get("/carrito", isAuth, async(req,res)=>{
+router.post("/carrito", isAuth, async(req,res)=>{
 
     const usuario: any = {
-        id: req.body.id
+        id: req.body.user
     }
+
+    const videojuego= req.body.id;
+
+    const videojuegoNuevo = await usuarioUseCases.addCarrito(videojuego,usuario.id)
 
     const carritoVideojuegos = await usuarioUseCases.getCarrito(usuario.id)
 
     res.json(carritoVideojuegos);
 
 })
+
+router.get("/carrito", isAuth, async(req,res)=>{
+
+    const idUsuario = req.body.user
+    const carritoVideojuegos = await usuarioUseCases.getCarrito(idUsuario)
+
+    res.json(carritoVideojuegos);
+
+})
+
+
 
 export {router as routerUsuarios};

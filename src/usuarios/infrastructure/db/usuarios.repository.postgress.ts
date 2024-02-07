@@ -13,16 +13,18 @@ export default class UsuarioRepositoryPostgress implements UsuarioRepository{
         throw new Error("Method not implemented.");
     }
     
-    addCarrito(videojuego: Videojuego, idUsuario: number): Promise<Videojuego>{
+    
+    addCarrito(idVideojuego: number, idUsuario: number): Promise<Videojuego>{
 
-        const consulta = `INSERT INTO public.compras("idVideojuego", "idUsuario", comprado) VALUES (${videojuego.id}, ${idUsuario}, false);`
+        const consulta = `INSERT INTO compras("idVideojuego", "idUsuario", comprado) VALUES (${idVideojuego}, ${idUsuario}, false);`
+
+        const videojuegoadd = executeQuery(consulta);
 
         const videojuegosCarrito= this.getCarrito(idUsuario);
 
         return videojuegosCarrito;
 
     }
-
 
     async getCarrito(idUsuario: number): Promise<Videojuego> {
 
@@ -46,7 +48,8 @@ export default class UsuarioRepositoryPostgress implements UsuarioRepository{
 
         const usuarioBD: Usuario = {
             nombre: rows[0].nombre,
-            password: rows[0].password
+            password: rows[0].password,
+            id: rows[0].id
         }
 
         return usuarioBD;

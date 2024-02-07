@@ -32,8 +32,8 @@ export default class UsuarioUseCases{
     }
 
 
-    async addCarrito(videojuego: Videojuego, usuarioID: number){
-        return this.usuarioRepository.addCarrito(videojuego, usuarioID)
+    async addCarrito(idVideojuego: number, usuarioID: number){
+        return this.usuarioRepository.addCarrito(idVideojuego, usuarioID)
     } 
 
     async getCarrito(idUsuario: number): Promise<Videojuego>{
