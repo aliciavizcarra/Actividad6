@@ -13,5 +13,7 @@ export default class VideojuegoUseCases{
         return this.videojuegosRepository.save(videojuego);
     }
 
+    async saveSteam(videojuego: Videojuego): any;
+
 
 }
